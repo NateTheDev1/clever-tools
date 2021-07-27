@@ -3,10 +3,7 @@ import {
 	LoginUser,
 	UserActionConstants,
 	LogoutUser,
-	SetLoading,
-	FetchUser,
-	UserState,
-	SetTheme
+	SetLoading
 } from './types';
 
 import decode from 'jwt-decode';

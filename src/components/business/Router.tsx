@@ -1,4 +1,5 @@
 import { Route, Switch, useLocation } from 'react-router';
+import Login from '../../pages/Login';
 import NotFound from './NotFound';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -13,7 +14,7 @@ const Router = () => {
 					<h1>Home</h1>
 				</PrivateRoute>
 				<PublicRoute path="/">
-					<h1>Login</h1>
+					<Login />
 				</PublicRoute>
 				<Route component={NotFound} />
 			</Switch>

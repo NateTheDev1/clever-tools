@@ -1,0 +1,92 @@
+.login {
+	color: black;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'  xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1046%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='rgba(255%2c 255%2c 255%2c 1)'%3e%3c/rect%3e%3cpath d='M1920 0L1497.32 0L1920 19.42z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M1497.32 0L1920 19.42L1920 110.03L1180.1299999999999 0z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M1180.13 0L1920 110.03L1920 710.18L876.8200000000002 0z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M876.8199999999999 0L1920 710.18L1920 836.68L393.2799999999999 0z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M0 1080L608.86 1080L0 660z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M0 660L608.86 1080L818.14 1080L0 568.34z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M0 568.34L818.14 1080L919.1 1080L0 567.45z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M0 567.45L919.1 1080L1451.3200000000002 1080L0 497.12000000000006z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1046'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+	background-repeat: repeat;
+	background-size: cover;
+
+	.login-container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: center;
+
+		.subtitle {
+			text-align: left;
+			font-weight: 300;
+		}
+
+		.header-text-lg {
+			font-size: 1.5rem;
+			letter-spacing: 0.5rem;
+		}
+
+		.hr {
+			width: 100%;
+			margin-top: 30px;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+
+			input[type='text'] {
+				border-radius: 5px;
+				color: black;
+				border: 1px solid gray;
+			}
+
+			input[type='password'] {
+				border-radius: 5px;
+				color: black;
+				border: 1px solid gray;
+			}
+
+			input {
+				transition: 0.2s;
+			}
+
+			input.error {
+				border: 1px solid red !important;
+			}
+
+			input:focus {
+				outline: none;
+				border: 1px solid #0fbab5;
+			}
+
+			button {
+				border-radius: 5px;
+				background: #0fbab5;
+				color: white;
+				width: 100%;
+				transition: 0.2s;
+			}
+
+			button:hover {
+				cursor: pointer;
+				opacity: 0.7;
+			}
+
+			button:focus {
+				outline: none;
+			}
+		}
+
+		h4 {
+			font-weight: 300;
+			text-align: center;
+		}
+	}
+}
+
+@media (max-width: 900px) {
+	.logo {
+		width: 20% !important;
+	}
+}
+
+@media (max-width: 500px) {
+	.logo {
+		width: 30% !important;
+	}
+}

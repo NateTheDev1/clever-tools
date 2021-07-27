@@ -1,9 +1,19 @@
-import { render } from "react-dom";
-import App from "./App";
+import { ApolloProvider } from '@apollo/client';
+import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import App from './App';
+import { apolloClient } from './components/business/GQLClient';
 
-import "./normalize.css";
-import "./tailwind.scss";
+import './normalize.scss';
+import './tailwind.css';
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 
-render(<App />, rootElement);
+render(
+	<ApolloProvider client={apolloClient}>
+		<Router>
+			<App />
+		</Router>
+	</ApolloProvider>,
+	rootElement
+);
