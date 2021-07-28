@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AddProperty } from '../components/ui/AddProperty';
 import Navbar from '../components/ui/Navbar';
 import { PropertiesTable } from '../components/ui/PropertiesTable';
 import './Properties.scss';
@@ -19,6 +20,7 @@ const Properties = () => {
 				<h3 className="header-title">PROPERTIES</h3>
 				<hr />
 				<div className="search-section">
+					<AddProperty year={year} />
 					<h4>Search By Year</h4>
 					<div className="years">
 						{years.map((yr, key) => (

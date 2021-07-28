@@ -74,62 +74,37 @@ const Navbar = () => {
 						Properties
 					</p>
 				</Link>
-				<Link to="/app/manage-properties" className="link">
-					<svg
-						style={{
-							color: location.pathname.includes(
-								'/manage-properties'
-							)
-								? '#0ABAB5'
-								: 'gray'
-						}}
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-7 w-7"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
-					</svg>
-					<p
-						style={{
-							color: location.pathname.includes(
-								'/manage-properties'
-							)
-								? '#0abab5'
-								: 'black'
-						}}
-					>
-						Manage
-					</p>
-				</Link>
-				<Link to="/app/admin" className="link">
-					<svg
-						style={{
-							color: location.pathname.includes('/admin')
-								? '#0ABAB5'
-								: 'gray'
-						}}
-						xmlns="http://www.w3.org/2000/svg"
-						className="h-7 w-7"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fillRule="evenodd"
-							d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-							clipRule="evenodd"
-						/>
-					</svg>
-					<p
-						style={{
-							color: location.pathname.includes('/admin')
-								? '#0abab5'
-								: 'black'
-						}}
-					>
-						Admin
-					</p>
-				</Link>
+
+				{user?.admin && (
+					<Link to="/app/admin" className="link">
+						<svg
+							style={{
+								color: location.pathname.includes('/admin')
+									? '#0ABAB5'
+									: 'gray'
+							}}
+							xmlns="http://www.w3.org/2000/svg"
+							className="h-7 w-7"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+						>
+							<path
+								fillRule="evenodd"
+								d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+								clipRule="evenodd"
+							/>
+						</svg>
+						<p
+							style={{
+								color: location.pathname.includes('/admin')
+									? '#0abab5'
+									: 'black'
+							}}
+						>
+							Admin
+						</p>
+					</Link>
+				)}
 				<div className="logout link" onClick={() => logout()}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

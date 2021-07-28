@@ -10,6 +10,7 @@ import { useGetPropertiesQuery } from '../../graphql';
 import { NoResultsIcon } from './NoResultsIcon';
 import { PropagateLoader } from 'react-spinners';
 import { useEffect } from 'react';
+import AddedProperty from './emitters/addedProperty';
 
 const columns = [
 	{
@@ -48,6 +49,14 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 	useEffect(() => {
 		refetch({ year });
 	}, [year, refetch]);
+
+	useEffect(() => {
+		AddedProperty.on('REFETCH', () => refetch());
+
+		return () => {
+			AddedProperty.off('REFETCH');
+		};
+	}, []);
 
 	return (
 		<TableContainer style={{ marginTop: '50px' }}>
