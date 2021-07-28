@@ -1,10 +1,12 @@
 // STATE
 
+import { GetUserQuery } from '../../graphql';
+
 export type UserState = {
 	authenticated: boolean;
 	token: string;
 	userId: number | undefined;
-	user: undefined;
+	user: GetUserQuery['getUser'] | undefined;
 	loading: boolean;
 };
 

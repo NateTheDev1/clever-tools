@@ -353,6 +353,7 @@ template {
 
 * {
 	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
 }
 
 .login-container {
@@ -363,4 +364,8 @@ template {
 	.login-container {
 		width: 90%;
 	}
+}
+
+.page-container {
+	display: flex;
 }

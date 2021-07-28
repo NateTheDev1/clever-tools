@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router';
+import Home from '../../pages/Home';
 import Login from '../../pages/Login';
+import { UserActions } from '../../redux/User/actions';
+import { UserSelectors } from '../../redux/User/selectors';
+import Navbar from '../ui/Navbar';
 import NotFound from './NotFound';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -7,11 +12,26 @@ import { PublicRoute } from './PublicRoute';
 const Router = () => {
 	const location = useLocation();
 
+	const user = UserSelectors.useSelectUser();
+	const getUser = UserActions.useFetchUser();
+
+	useEffect(() => {
+		if (!user) {
+			getUser();
+		}
+	}, []);
+
 	return (
 		<div>
 			<Switch location={location}>
-				<PrivateRoute path="/home">
-					<h1>Home</h1>
+				<PrivateRoute path="/app/admin">
+					<Home />
+				</PrivateRoute>
+				<PrivateRoute path="/app/properties">
+					<Home />
+				</PrivateRoute>
+				<PrivateRoute path="/app">
+					<Home />
 				</PrivateRoute>
 				<PublicRoute path="/">
 					<Login />
