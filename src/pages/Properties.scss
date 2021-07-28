@@ -1,0 +1,44 @@
+.properties {
+	background: #f5f8fe;
+	width: 100%;
+
+	.header-title {
+		letter-spacing: 2px;
+	}
+
+	hr {
+		margin-top: 20px;
+	}
+
+	.search-section {
+		margin-top: 50px;
+
+		.years {
+			display: flex;
+			margin-top: 20px;
+
+			.year {
+				margin-right: 1rem;
+				background: white;
+				border-radius: 3px;
+				opacity: 0.5;
+				padding: 1rem;
+				box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+				transition: 0.3s;
+				p {
+					text-align: center;
+				}
+			}
+
+			.year:hover {
+				cursor: pointer;
+				opacity: 0.8;
+			}
+
+			.year.active {
+				opacity: 1;
+				color: #0fbab5;
+			}
+		}
+	}
+}

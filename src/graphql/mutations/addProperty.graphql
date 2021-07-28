@@ -1,0 +1,5 @@
+mutation AddProperty($input: AddPropertyInput!) {
+	addProperty(input: $input) {
+		id
+	}
+}

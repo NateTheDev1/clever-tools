@@ -1,0 +1,8 @@
+query GetStatistics {
+	getStatistics {
+		totalProperties
+		totalOpenRooms
+		totalUnavailableRooms
+		totalRooms
+	}
+}

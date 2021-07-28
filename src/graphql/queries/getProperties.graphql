@@ -1,0 +1,10 @@
+query GetProperties($year: String!) {
+	getProperties(year: $year) {
+		id
+		name
+		address
+		totalRooms
+		availableRooms
+		year
+	}
+}
