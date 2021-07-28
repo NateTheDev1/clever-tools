@@ -1,4 +1,40 @@
 .home {
 	background: #f5f8fe;
 	width: 100%;
+
+	.header-title {
+		letter-spacing: 2px;
+	}
+
+	hr {
+		margin-top: 20px;
+	}
+
+	.row {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 50px;
+
+		.stat {
+			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+			width: 45%;
+			height: 150px;
+			background: white;
+			border-radius: 5px;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+
+			h4 {
+				opacity: 0.7;
+			}
+
+			p {
+				margin-top: 10px;
+				font-size: 2rem;
+				color: #0abab5;
+			}
+		}
+	}
 }
