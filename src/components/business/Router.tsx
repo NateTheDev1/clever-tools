@@ -27,6 +27,9 @@ const Router = () => {
 				<PrivateRoute path="/app/admin">
 					<Home />
 				</PrivateRoute>
+				<PrivateRoute path="/app/properties/:propertyId">
+					<h1>Property page</h1>
+				</PrivateRoute>
 				<PrivateRoute path="/app/properties">
 					<Properties />
 				</PrivateRoute>

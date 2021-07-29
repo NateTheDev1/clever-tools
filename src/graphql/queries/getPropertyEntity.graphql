@@ -1,0 +1,22 @@
+query GetPropertyEntity($propertyId: Int!) {
+	getPropertyEntity(propertyId: $propertyId) {
+		property {
+			id
+			name
+			address
+			year
+			year
+		}
+		rooms {
+			id
+			name
+			available
+			year
+			updates {
+				id
+				timestamp
+				room
+			}
+		}
+	}
+}

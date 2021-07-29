@@ -11,6 +11,7 @@ import { NoResultsIcon } from './NoResultsIcon';
 import { PropagateLoader } from 'react-spinners';
 import { useEffect } from 'react';
 import AddedProperty from './emitters/addedProperty';
+import { useHistory } from 'react-router-dom';
 
 const columns = [
 	{
@@ -39,10 +40,9 @@ const columns = [
 	}
 ];
 
-function createData() {}
-
 export const PropertiesTable = ({ year }: { year: string }) => {
-	const { data, loading, error, refetch } = useGetPropertiesQuery({
+	const history = useHistory();
+	const { data, loading, refetch } = useGetPropertiesQuery({
 		variables: { year }
 	});
 
@@ -57,6 +57,8 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 			AddedProperty.off('REFETCH');
 		};
 	}, []);
+
+	const handleClick = (propertyId: number) => {};
 
 	return (
 		<TableContainer style={{ marginTop: '50px' }}>
@@ -80,6 +82,9 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 						return (
 							<TableRow
 								hover
+								onClick={() =>
+									history.push('/app/properties/' + row?.id)
+								}
 								role="checkbox"
 								tabIndex={-1}
 								key={row?.id}
