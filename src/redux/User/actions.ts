@@ -14,7 +14,7 @@ import { useGetUserLazyQuery } from '../../graphql';
 export const UserActions: RootActions['user'] = {
 	useLogin() {
 		const dispatch = useDispatch();
-		const fetchUser = UserActions.useFetchUser();
+		const fetchUser = this.useFetchUser();
 
 		return async (token: string) => {
 			const action: LoginUser = {
@@ -22,14 +22,11 @@ export const UserActions: RootActions['user'] = {
 				payload: token
 			};
 
-			await localStorage.setItem(
-				process.env.REACT_APP_CLEVER_TOKEN!,
-				token
-			);
+			localStorage.setItem(process.env.REACT_APP_CLEVER_TOKEN!, token);
 
-			dispatch(action);
-
-			fetchUser();
+			fetchUser().then(() => {
+				dispatch(action);
+			});
 
 			return true;
 		};
@@ -49,8 +46,6 @@ export const UserActions: RootActions['user'] = {
 		};
 	},
 	useFetchUser() {
-		const setLoading = UserActions.useSetLoading();
-
 		const dispatch = useDispatch();
 
 		const [getUser] = useGetUserLazyQuery({
@@ -70,10 +65,10 @@ export const UserActions: RootActions['user'] = {
 				process.env.REACT_APP_CLEVER_TOKEN!
 			)!) as string;
 
-			const jwt: { userId: number } = decode(token);
-
-			getUser({ variables: { id: jwt.userId } });
-			setLoading(true);
+			if (token) {
+				const jwt: { userId: number } = decode(token);
+				getUser({ variables: { id: jwt.userId } });
+			}
 		};
 	},
 	useSetLoading() {

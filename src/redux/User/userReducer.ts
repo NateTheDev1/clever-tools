@@ -17,7 +17,6 @@ export const userReducer = (
 		case UserActionConstants.USER_LOGGED_IN: {
 			return {
 				...state,
-				authenticated: true,
 				token: action.payload,
 				loading: false
 			};

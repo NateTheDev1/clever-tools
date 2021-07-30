@@ -22,6 +22,7 @@ const Login = () => {
 
 	const [loginUser, loginData] = useLoginMutation();
 	const setLoggedIn = UserActions.useLogin();
+	const fetchUser = UserActions.useFetchUser();
 
 	const onSubmit = (data: Inputs) => {
 		loginUser({
@@ -35,6 +36,7 @@ const Login = () => {
 			.then(res => {
 				if (res.data) {
 					setLoggedIn(res.data.login);
+					fetchUser();
 				} else {
 					setFormError('Incorrect username or password.');
 				}

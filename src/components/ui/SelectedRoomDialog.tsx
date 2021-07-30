@@ -13,7 +13,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
-import { Room, useEditRoomMutation } from '../../graphql';
+import {
+	Room,
+	useDeleteRoomMutation,
+	useEditRoomMutation
+} from '../../graphql';
 import AddedRoom from './emitters/addedRoom';
 
 type Inputs = {
@@ -45,6 +49,7 @@ export const SelectedRoomDialog = ({
 	} = useForm<Inputs>();
 
 	const [editRoom, editRoomData] = useEditRoomMutation();
+	const [deleteRoomFn] = useDeleteRoomMutation();
 
 	const { year, propertyId }: { year: string; propertyId: string } =
 		useParams();
@@ -69,6 +74,25 @@ export const SelectedRoomDialog = ({
 						AddedRoom.emit('ADDED_ROOM', {});
 						setRoom(undefined);
 					} else {
+					}
+				})
+				.catch(e => {
+					console.error(e);
+				});
+		}
+	};
+
+	const deleteRoom = () => {
+		const continueDelete = window.confirm(
+			'Are you sure? This cannot be undone.'
+		);
+		if (room && continueDelete) {
+			deleteRoomFn({ variables: { id: room.id } })
+				.then(res => {
+					if (res.data) {
+						AddedRoom.emit('ADDED_ROOM', {});
+
+						setRoom(undefined);
 					}
 				})
 				.catch(e => {
@@ -147,6 +171,12 @@ export const SelectedRoomDialog = ({
 					</div>
 				</DialogContent>
 				<DialogActions>
+					<Button
+						disabled={editRoomData.loading}
+						onClick={() => deleteRoom()}
+					>
+						Delete
+					</Button>
 					<Button
 						disabled={editRoomData.loading}
 						onClick={() => setRoom(undefined)}
