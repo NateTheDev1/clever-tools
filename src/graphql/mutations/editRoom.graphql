@@ -1,0 +1,3 @@
+mutation EditRoom($id: Int!, $input: EditRoomInput!) {
+	editRoom(id: $id, input: $input)
+}

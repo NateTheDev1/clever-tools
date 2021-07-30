@@ -49,6 +49,8 @@ export const UserActions: RootActions['user'] = {
 		};
 	},
 	useFetchUser() {
+		const setLoading = UserActions.useSetLoading();
+
 		const dispatch = useDispatch();
 
 		const [getUser] = useGetUserLazyQuery({
@@ -71,6 +73,7 @@ export const UserActions: RootActions['user'] = {
 			const jwt: { userId: number } = decode(token);
 
 			getUser({ variables: { id: jwt.userId } });
+			setLoading(true);
 		};
 	},
 	useSetLoading() {

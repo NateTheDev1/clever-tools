@@ -36,7 +36,6 @@ const Login = () => {
 				if (res.data) {
 					setLoggedIn(res.data.login);
 				} else {
-					console.log(res.errors);
 					setFormError('Incorrect username or password.');
 				}
 			})

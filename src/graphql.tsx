@@ -42,6 +42,11 @@ export type CreateUserInput = {
   createdBy?: Maybe<Scalars['String']>;
 };
 
+export type EditRoomInput = {
+  name?: Maybe<Scalars['String']>;
+  available?: Maybe<Scalars['Boolean']>;
+};
+
 export type LoginInput = {
   username: Scalars['String'];
   password: Scalars['String'];
@@ -52,6 +57,7 @@ export type Mutation = {
   deleteProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
+  editRoom: Scalars['Boolean'];
   createUser: User;
   login: Scalars['String'];
 };
@@ -74,6 +80,12 @@ export type MutationAddRoomArgs = {
 
 export type MutationDeleteRoomArgs = {
   id: Scalars['Int'];
+};
+
+
+export type MutationEditRoomArgs = {
+  id: Scalars['Int'];
+  input?: Maybe<EditRoomInput>;
 };
 
 
@@ -115,6 +127,7 @@ export type QueryGetPropertiesArgs = {
 
 export type QueryGetPropertyEntityArgs = {
   propertyId: Scalars['Int'];
+  year: Scalars['Int'];
 };
 
 
@@ -190,6 +203,14 @@ export type DeleteRoomMutationVariables = Exact<{
 
 export type DeleteRoomMutation = { deleteRoom: boolean };
 
+export type EditRoomMutationVariables = Exact<{
+  id: Scalars['Int'];
+  input: EditRoomInput;
+}>;
+
+
+export type EditRoomMutation = { editRoom: boolean };
+
 export type LoginMutationVariables = Exact<{
   credentials: LoginInput;
 }>;
@@ -206,6 +227,7 @@ export type GetPropertiesQuery = { getProperties: Array<Maybe<{ id: number, name
 
 export type GetPropertyEntityQueryVariables = Exact<{
   propertyId: Scalars['Int'];
+  year: Scalars['Int'];
 }>;
 
 
@@ -390,6 +412,38 @@ export function useDeleteRoomMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteRoomMutationHookResult = ReturnType<typeof useDeleteRoomMutation>;
 export type DeleteRoomMutationResult = Apollo.MutationResult<DeleteRoomMutation>;
 export type DeleteRoomMutationOptions = Apollo.BaseMutationOptions<DeleteRoomMutation, DeleteRoomMutationVariables>;
+export const EditRoomDocument = gql`
+    mutation EditRoom($id: Int!, $input: EditRoomInput!) {
+  editRoom(id: $id, input: $input)
+}
+    `;
+export type EditRoomMutationFn = Apollo.MutationFunction<EditRoomMutation, EditRoomMutationVariables>;
+
+/**
+ * __useEditRoomMutation__
+ *
+ * To run a mutation, you first call `useEditRoomMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditRoomMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editRoomMutation, { data, loading, error }] = useEditRoomMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEditRoomMutation(baseOptions?: Apollo.MutationHookOptions<EditRoomMutation, EditRoomMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditRoomMutation, EditRoomMutationVariables>(EditRoomDocument, options);
+      }
+export type EditRoomMutationHookResult = ReturnType<typeof useEditRoomMutation>;
+export type EditRoomMutationResult = Apollo.MutationResult<EditRoomMutation>;
+export type EditRoomMutationOptions = Apollo.BaseMutationOptions<EditRoomMutation, EditRoomMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($credentials: LoginInput!) {
   login(credentials: $credentials)
@@ -462,8 +516,8 @@ export type GetPropertiesQueryHookResult = ReturnType<typeof useGetPropertiesQue
 export type GetPropertiesLazyQueryHookResult = ReturnType<typeof useGetPropertiesLazyQuery>;
 export type GetPropertiesQueryResult = Apollo.QueryResult<GetPropertiesQuery, GetPropertiesQueryVariables>;
 export const GetPropertyEntityDocument = gql`
-    query GetPropertyEntity($propertyId: Int!) {
-  getPropertyEntity(propertyId: $propertyId) {
+    query GetPropertyEntity($propertyId: Int!, $year: Int!) {
+  getPropertyEntity(propertyId: $propertyId, year: $year) {
     property {
       id
       name
@@ -499,6 +553,7 @@ export const GetPropertyEntityDocument = gql`
  * const { data, loading, error } = useGetPropertyEntityQuery({
  *   variables: {
  *      propertyId: // value for 'propertyId'
+ *      year: // value for 'year'
  *   },
  * });
  */

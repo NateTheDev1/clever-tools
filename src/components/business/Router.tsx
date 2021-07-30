@@ -3,6 +3,7 @@ import { Route, Switch, useLocation } from 'react-router';
 import Home from '../../pages/Home';
 import Login from '../../pages/Login';
 import Properties from '../../pages/Properties';
+import Property from '../../pages/Property';
 import { UserActions } from '../../redux/User/actions';
 import { UserSelectors } from '../../redux/User/selectors';
 import NotFound from './NotFound';
@@ -27,8 +28,8 @@ const Router = () => {
 				<PrivateRoute path="/app/admin">
 					<Home />
 				</PrivateRoute>
-				<PrivateRoute path="/app/properties/:propertyId">
-					<h1>Property page</h1>
+				<PrivateRoute path="/app/properties/:year/:propertyId">
+					<Property />
 				</PrivateRoute>
 				<PrivateRoute path="/app/properties">
 					<Properties />

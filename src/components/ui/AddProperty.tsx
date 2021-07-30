@@ -37,7 +37,6 @@ export const AddProperty = ({ year }: { year: string }) => {
 					AddedProperty.emit('REFETCH', true);
 					reset();
 				} else {
-					console.log(res.errors);
 					setFormError('Could not add property');
 				}
 			})

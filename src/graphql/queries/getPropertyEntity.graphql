@@ -1,5 +1,5 @@
-query GetPropertyEntity($propertyId: Int!) {
-	getPropertyEntity(propertyId: $propertyId) {
+query GetPropertyEntity($propertyId: Int!, $year: Int!) {
+	getPropertyEntity(propertyId: $propertyId, year: $year) {
 		property {
 			id
 			name

@@ -6,58 +6,27 @@ import {
 	TableCell,
 	TableBody
 } from '@material-ui/core';
-import { useGetPropertiesQuery } from '../../graphql';
+import { isBoolean } from 'util';
+import { Room } from '../../graphql';
+import SelectedRoom from './emitters/selectedRoom';
 import { NoResultsIcon } from './NoResultsIcon';
-import { PropagateLoader } from 'react-spinners';
-import { useEffect } from 'react';
-import AddedProperty from './emitters/addedProperty';
-import { useHistory } from 'react-router-dom';
 
 const columns = [
 	{
 		id: 'name',
-		label: 'Property Name',
+		label: 'Room Name',
 		minWidth: 170,
 		align: undefined
 	},
 	{
-		id: 'address',
-		label: 'Property Adress',
-		minWidth: 100,
-		align: undefined
-	},
-	{
-		id: 'totalRooms',
-		label: 'Total Rooms',
-		minWidth: 100,
-		align: undefined
-	},
-	{
-		id: 'availableRooms',
-		label: 'Available Rooms',
+		id: 'available',
+		label: 'Available',
 		minWidth: 100,
 		align: undefined
 	}
 ];
 
-export const PropertiesTable = ({ year }: { year: string }) => {
-	const history = useHistory();
-	const { data, loading, refetch } = useGetPropertiesQuery({
-		variables: { year }
-	});
-
-	useEffect(() => {
-		refetch({ year });
-	}, [year, refetch]);
-
-	useEffect(() => {
-		AddedProperty.on('REFETCH', () => refetch());
-
-		return () => {
-			AddedProperty.off('REFETCH');
-		};
-	}, []);
-
+export const RoomsTable = ({ rooms = [] }: { rooms: Room[] }) => {
 	return (
 		<TableContainer style={{ marginTop: '50px' }}>
 			<Table stickyHeader aria-label="sticky table">
@@ -76,18 +45,13 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 				</TableHead>
 
 				<TableBody>
-					{data?.getProperties.map(row => {
+					{rooms.map(row => {
 						return (
 							<TableRow
 								className="table-row"
 								hover
 								onClick={() =>
-									history.push(
-										'/app/properties/' +
-											year +
-											'/' +
-											row?.id
-									)
+									SelectedRoom.emit('SELECTED_ROOM', row)
 								}
 								role="checkbox"
 								tabIndex={-1}
@@ -101,7 +65,14 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 											key={column.id}
 											align={column.align}
 										>
-											{value}
+											{isBoolean(value) &&
+												value === true &&
+												'Room Available'}
+											{isBoolean(value) &&
+												value === false &&
+												'Not Available'}
+
+											{!isBoolean(value) && value}
 										</TableCell>
 									);
 								})}
@@ -110,7 +81,7 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 					})}
 				</TableBody>
 			</Table>
-			{data && data.getProperties.length < 1 && (
+			{rooms.length < 1 && (
 				<div
 					style={{
 						width: '100%',
@@ -132,24 +103,8 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 							fontWeight: 300
 						}}
 					>
-						No Properties Found.
+						No Rooms Found For This Property.
 					</p>
-				</div>
-			)}
-			{loading && (
-				<div
-					style={{
-						width: '100%',
-						margin: '0 auto',
-						display: 'flex',
-						justifyContent: 'center',
-						flexDirection: 'column',
-						alignItems: 'center',
-						marginTop: '2rem',
-						marginBottom: '2rem'
-					}}
-				>
-					<PropagateLoader color="#0FBAB5" loading={true} />
 				</div>
 			)}
 		</TableContainer>
