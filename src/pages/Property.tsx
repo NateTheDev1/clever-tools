@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
+import AddedRoom from '../components/ui/emitters/addedRoom';
 import SelectedRoom from '../components/ui/emitters/selectedRoom';
 import Navbar from '../components/ui/Navbar';
 import { RoomsTable } from '../components/ui/RoomsTable';
@@ -14,7 +15,7 @@ const Property = () => {
 		useParams();
 	const history = useHistory();
 
-	const { data, loading, error } = useGetPropertyEntityQuery({
+	const { data, loading, error, refetch } = useGetPropertyEntityQuery({
 		variables: { propertyId: Number(propertyId), year: Number(year) }
 	});
 
@@ -31,6 +32,16 @@ const Property = () => {
 
 		return () => {
 			SelectedRoom.off('SELECTED_ROOM');
+		};
+	}, []);
+
+	useEffect(() => {
+		AddedRoom.on('ADDED_ROOM', () => {
+			refetch({ propertyId: Number(propertyId), year: Number(year) });
+		});
+
+		return () => {
+			AddedRoom.off('ADDED_ROOM');
 		};
 	}, []);
 
