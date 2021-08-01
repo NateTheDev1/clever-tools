@@ -8,6 +8,7 @@ import AddedRoom from '../components/ui/emitters/addedRoom';
 import SelectedRoom from '../components/ui/emitters/selectedRoom';
 import Navbar from '../components/ui/Navbar';
 import { RoomsTable } from '../components/ui/RoomsTable';
+import { SelectedPropertyDialog } from '../components/ui/SelectedPropertyDialog';
 import { SelectedRoomDialog } from '../components/ui/SelectedRoomDialog';
 import {
 	Room,
@@ -21,8 +22,11 @@ const Property = () => {
 		useParams();
 	const history = useHistory();
 
+	const [editingProperty, setEditingProperty] = useState(false);
+
 	const { data, loading, error, refetch } = useGetPropertyEntityQuery({
-		variables: { propertyId: Number(propertyId), year: Number(year) }
+		variables: { propertyId: Number(propertyId), year: Number(year) },
+		fetchPolicy: 'network-only'
 	});
 
 	const [deleteProperty] = useDeletePropertyMutation();
@@ -72,6 +76,10 @@ const Property = () => {
 		}
 	};
 
+	const onSave = () => {
+		refetch();
+	};
+
 	return (
 		<div className="page-container">
 			<Navbar />
@@ -80,6 +88,18 @@ const Property = () => {
 					room={selectedRoom}
 					setRoom={setSelectedRoom}
 				/>
+				{data?.getPropertyEntity.property && (
+					<SelectedPropertyDialog
+						property={{
+							...data.getPropertyEntity.property,
+							totalRooms: 0,
+							availableRooms: 0
+						}}
+						onSave={onSave}
+						open={editingProperty}
+						setOpen={setEditingProperty}
+					/>
+				)}
 
 				<div className="header">
 					<h3 className="header-title">
@@ -95,7 +115,9 @@ const Property = () => {
 							Go Back
 						</button>
 
-						<button>Edit Property</button>
+						<button onClick={() => setEditingProperty(true)}>
+							Edit Property
+						</button>
 						<button
 							className="delete-btn"
 							onClick={() => onDelete()}
@@ -126,7 +148,7 @@ const Property = () => {
 							marginBottom: '2rem'
 						}}
 					>
-						<PropagateLoader loading={true} />
+						<PropagateLoader loading={true} color="#0FBAB5" />
 					</div>
 				)}
 			</div>

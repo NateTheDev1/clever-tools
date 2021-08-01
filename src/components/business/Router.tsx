@@ -9,6 +9,7 @@ import { UserSelectors } from '../../redux/User/selectors';
 import NotFound from './NotFound';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 const Router = () => {
 	const location = useLocation();
@@ -24,24 +25,32 @@ const Router = () => {
 
 	return (
 		<div>
-			<Switch location={location}>
-				<PrivateRoute path="/app/admin">
-					<Home />
-				</PrivateRoute>
-				<PrivateRoute path="/app/properties/:year/:propertyId">
-					<Property />
-				</PrivateRoute>
-				<PrivateRoute path="/app/properties">
-					<Properties />
-				</PrivateRoute>
-				<PrivateRoute path="/app">
-					<Home />
-				</PrivateRoute>
-				<PublicRoute path="/">
-					<Login />
-				</PublicRoute>
-				<Route component={NotFound} />
-			</Switch>
+			<SwitchTransition>
+				<CSSTransition
+					key={location.key}
+					classNames="fade"
+					timeout={100}
+				>
+					<Switch location={location}>
+						<PrivateRoute path="/app/admin">
+							<Home />
+						</PrivateRoute>
+						<PrivateRoute path="/app/properties/:year/:propertyId">
+							<Property />
+						</PrivateRoute>
+						<PrivateRoute path="/app/properties">
+							<Properties />
+						</PrivateRoute>
+						<PrivateRoute path="/app">
+							<Home />
+						</PrivateRoute>
+						<PublicRoute path="/">
+							<Login />
+						</PublicRoute>
+						<Route component={NotFound} />
+					</Switch>
+				</CSSTransition>
+			</SwitchTransition>
 		</div>
 	);
 };

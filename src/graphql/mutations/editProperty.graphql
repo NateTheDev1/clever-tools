@@ -1,0 +1,3 @@
+mutation EditProperty($id: Int!, $input: EditPropertyInput!) {
+	editProperty(id: $id, input: $input)
+}

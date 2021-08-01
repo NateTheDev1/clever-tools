@@ -42,6 +42,11 @@ export type CreateUserInput = {
   createdBy?: Maybe<Scalars['String']>;
 };
 
+export type EditPropertyInput = {
+  name?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+};
+
 export type EditRoomInput = {
   name?: Maybe<Scalars['String']>;
   available?: Maybe<Scalars['Boolean']>;
@@ -55,6 +60,7 @@ export type LoginInput = {
 export type Mutation = {
   addProperty: Property;
   deleteProperty: Scalars['Boolean'];
+  editProperty: Scalars['Boolean'];
   addRoom: Room;
   deleteRoom: Scalars['Boolean'];
   editRoom: Scalars['Boolean'];
@@ -70,6 +76,12 @@ export type MutationAddPropertyArgs = {
 
 export type MutationDeletePropertyArgs = {
   id: Scalars['Int'];
+};
+
+
+export type MutationEditPropertyArgs = {
+  id: Scalars['Int'];
+  input: EditPropertyInput;
 };
 
 
@@ -202,6 +214,14 @@ export type DeleteRoomMutationVariables = Exact<{
 
 
 export type DeleteRoomMutation = { deleteRoom: boolean };
+
+export type EditPropertyMutationVariables = Exact<{
+  id: Scalars['Int'];
+  input: EditPropertyInput;
+}>;
+
+
+export type EditPropertyMutation = { editProperty: boolean };
 
 export type EditRoomMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -412,6 +432,38 @@ export function useDeleteRoomMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteRoomMutationHookResult = ReturnType<typeof useDeleteRoomMutation>;
 export type DeleteRoomMutationResult = Apollo.MutationResult<DeleteRoomMutation>;
 export type DeleteRoomMutationOptions = Apollo.BaseMutationOptions<DeleteRoomMutation, DeleteRoomMutationVariables>;
+export const EditPropertyDocument = gql`
+    mutation EditProperty($id: Int!, $input: EditPropertyInput!) {
+  editProperty(id: $id, input: $input)
+}
+    `;
+export type EditPropertyMutationFn = Apollo.MutationFunction<EditPropertyMutation, EditPropertyMutationVariables>;
+
+/**
+ * __useEditPropertyMutation__
+ *
+ * To run a mutation, you first call `useEditPropertyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useEditPropertyMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [editPropertyMutation, { data, loading, error }] = useEditPropertyMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useEditPropertyMutation(baseOptions?: Apollo.MutationHookOptions<EditPropertyMutation, EditPropertyMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<EditPropertyMutation, EditPropertyMutationVariables>(EditPropertyDocument, options);
+      }
+export type EditPropertyMutationHookResult = ReturnType<typeof useEditPropertyMutation>;
+export type EditPropertyMutationResult = Apollo.MutationResult<EditPropertyMutation>;
+export type EditPropertyMutationOptions = Apollo.BaseMutationOptions<EditPropertyMutation, EditPropertyMutationVariables>;
 export const EditRoomDocument = gql`
     mutation EditRoom($id: Int!, $input: EditRoomInput!) {
   editRoom(id: $id, input: $input)
