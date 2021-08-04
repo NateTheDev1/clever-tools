@@ -10,6 +10,7 @@ import NotFound from './NotFound';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import Admin from '../../pages/Admin';
 
 const Router = () => {
 	const location = useLocation();
@@ -33,7 +34,7 @@ const Router = () => {
 				>
 					<Switch location={location}>
 						<PrivateRoute path="/app/admin">
-							<Home />
+							<Admin />
 						</PrivateRoute>
 						<PrivateRoute path="/app/properties/:year/:propertyId">
 							<Property />

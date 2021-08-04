@@ -1,11 +1,9 @@
 import {
 	Button,
-	Checkbox,
 	Dialog,
 	DialogActions,
 	DialogContent,
-	DialogTitle,
-	FormControlLabel
+	DialogTitle
 } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';

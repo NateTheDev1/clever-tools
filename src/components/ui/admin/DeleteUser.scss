@@ -1,0 +1,57 @@
+.delete-user {
+	margin-top: 50px;
+
+	h4 {
+		font-size: 1.5rem;
+		font-weight: 500;
+	}
+
+	hr {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.search {
+		input[type='text'] {
+			border-radius: 5px;
+			color: black;
+			border: 1px solid gray;
+		}
+
+		input {
+			transition: 0.2s;
+		}
+
+		input.error {
+			border: 1px solid red !important;
+		}
+
+		input:focus {
+			outline: none;
+			border: 1px solid #0fbab5;
+		}
+		display: flex;
+		flex-direction: column;
+	}
+
+	.results {
+		.result-list {
+			display: flex;
+			flex-direction: column;
+
+			.result {
+				margin-top: 1rem;
+				padding: 1rem;
+				background: white;
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					color: red;
+					font-weight: 500;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+}
