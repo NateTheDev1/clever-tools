@@ -19,6 +19,4 @@ export const PublicRoute: any = ({
 	if (authenticated && !loading) {
 		return <Redirect to="/app" />;
 	}
-
-	return <Loading />;
 };
