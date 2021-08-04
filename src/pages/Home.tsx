@@ -11,8 +11,6 @@ const Home = () => {
 		<div className="page-container">
 			<Navbar />
 			<div className="home p-8">
-				<h3 className="header-title">DASHBOARD</h3>
-				<hr />
 				{loading && (
 					<div
 						className="mt-12 mb-8 m-auto"
@@ -27,6 +25,18 @@ const Home = () => {
 				)}
 				{data?.getStatistics && (
 					<>
+						<h1
+							style={{
+								textAlign: 'center',
+								fontSize: '2rem',
+								fontWeight: 300,
+								textTransform: 'uppercase',
+								letterSpacing: '1rem',
+								marginTop: '100px'
+							}}
+						>
+							Your Insights
+						</h1>
 						<div className="row">
 							<div className="stat p-8">
 								<h4>Total Properties</h4>
@@ -49,7 +59,6 @@ const Home = () => {
 								</p>
 							</div>
 						</div>
-						<hr />
 					</>
 				)}
 			</div>

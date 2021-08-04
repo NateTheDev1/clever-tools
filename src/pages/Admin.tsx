@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { CreateUser } from '../components/ui/admin/CreateUser';
 import { DeleteUser } from '../components/ui/admin/DeleteUser';
 import Navbar from '../components/ui/Navbar';
 import { UserSelectors } from '../redux/User/selectors';
@@ -24,7 +25,7 @@ const Admin = () => {
 			<Navbar />
 			{user && user.admin && (
 				<div className="admin p-8">
-					<h3 className="header-title">ADMIN</h3>
+					<h3 className="header-title">ADMIN DASHBOARD</h3>
 					<hr className="hr" />
 
 					<div className="action-container">
@@ -37,10 +38,16 @@ const Admin = () => {
 							>
 								Delete a user
 							</p>
-							<p className="action-button">Create a new user</p>
+							<p
+								className="action-button"
+								onClick={() => setPageState('CREATE_USER')}
+							>
+								Create a new user
+							</p>
 						</div>
 					</div>
 					{pageState === 'DELETE_USER' && <DeleteUser />}
+					{pageState === 'CREATE_USER' && <CreateUser />}
 				</div>
 			)}
 		</div>

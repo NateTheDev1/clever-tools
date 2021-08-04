@@ -9,7 +9,7 @@ export const DeleteUser = () => {
 	const [queryUsers, { data, loading }] = useSearchUsersLazyQuery({
 		fetchPolicy: 'network-only'
 	});
-	const [deleteUser, deleteUserData] = useDeleteUserMutation();
+	const [deleteUser] = useDeleteUserMutation();
 
 	const onChange = (e: any) => {
 		if (e.target.value.length > 0) {
@@ -66,8 +66,13 @@ export const DeleteUser = () => {
 							<>
 								<div className="result" key={key}>
 									<p>Username: {user?.username}</p>
-									<button onClick={() => onDelete(user?.id!)}>
-										Delete
+									<button
+										onClick={() => onDelete(user?.id!)}
+										disabled={user?.username === 'root'}
+									>
+										{user?.username === 'root'
+											? 'Cannot delete the root user'
+											: 'Delete'}
 									</button>
 								</div>
 								<hr />

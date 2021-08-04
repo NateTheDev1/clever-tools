@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import { PropagateLoader } from 'react-spinners';
 import { useAddRoomMutation } from '../../graphql';
 import './AddProperty.scss';
-import AddedProperty from './emitters/addedProperty';
 import AddedRoom from './emitters/addedRoom';
 
 type Inputs = {
