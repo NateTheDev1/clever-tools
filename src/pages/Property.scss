@@ -2,7 +2,9 @@
 	background: #f5f8fe;
 	width: 100%;
 	height: 100vh;
-	overflow-y: scroll;
+	@media (max-width: 650px) {
+		height: unset;
+	}
 
 	.header-title {
 		letter-spacing: 2px;

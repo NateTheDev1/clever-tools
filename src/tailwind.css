@@ -38,3 +38,9 @@
 body {
 	overflow-x: hidden;
 }
+
+@media (max-width: 650px) {
+	body {
+		overflow-x: scroll;
+	}
+}

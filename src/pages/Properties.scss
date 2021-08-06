@@ -4,6 +4,10 @@
 	height: 100vh;
 	overflow-y: scroll;
 
+	@media (max-width: 650px) {
+		height: unset;
+	}
+
 	.header-title {
 		letter-spacing: 2px;
 	}
