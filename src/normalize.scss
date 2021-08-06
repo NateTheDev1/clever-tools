@@ -390,3 +390,26 @@ template {
 .fade-exit-active {
 	transition: opacity 500ms;
 }
+
+.search {
+	input[type='text'] {
+		border-radius: 5px;
+		color: black;
+		border: 1px solid gray;
+	}
+
+	input {
+		transition: 0.2s;
+	}
+
+	input.error {
+		border: 1px solid red !important;
+	}
+
+	input:focus {
+		outline: none;
+		border: 1px solid #0fbab5;
+	}
+	display: flex;
+	flex-direction: column;
+}

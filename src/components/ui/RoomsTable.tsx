@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import { isBoolean } from 'util';
 import { Room } from '../../graphql';
+import { UserSelectors } from '../../redux/User/selectors';
 import SelectedRoom from './emitters/selectedRoom';
 import { NoResultsIcon } from './NoResultsIcon';
 
@@ -27,6 +28,8 @@ const columns = [
 ];
 
 export const RoomsTable = ({ rooms = [] }: { rooms: Room[] }) => {
+	const user = UserSelectors.useSelectUser();
+
 	return (
 		<TableContainer style={{ marginTop: '50px' }}>
 			<Table stickyHeader aria-label="sticky table">
@@ -49,10 +52,12 @@ export const RoomsTable = ({ rooms = [] }: { rooms: Room[] }) => {
 						return (
 							<TableRow
 								className="table-row"
-								hover
-								onClick={() =>
-									SelectedRoom.emit('SELECTED_ROOM', row)
-								}
+								hover={user?.admin}
+								onClick={() => {
+									if (user?.admin) {
+										SelectedRoom.emit('SELECTED_ROOM', row);
+									}
+								}}
 								role="checkbox"
 								tabIndex={-1}
 								key={row?.id}

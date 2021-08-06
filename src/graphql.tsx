@@ -132,6 +132,7 @@ export type PropertyEntity = {
 
 export type Query = {
   getProperties: Array<Maybe<Property>>;
+  getPropertiesSearch: Array<Maybe<Property>>;
   getStatistics: Statistic;
   getPropertyEntity: PropertyEntity;
   getUser: User;
@@ -141,6 +142,12 @@ export type Query = {
 
 export type QueryGetPropertiesArgs = {
   year: Scalars['String'];
+};
+
+
+export type QueryGetPropertiesSearchArgs = {
+  year: Scalars['String'];
+  query: Scalars['String'];
 };
 
 
@@ -263,6 +270,14 @@ export type GetPropertiesQueryVariables = Exact<{
 
 
 export type GetPropertiesQuery = { getProperties: Array<Maybe<{ id: number, name: string, address: string, totalRooms: number, availableRooms: number, year: string }>> };
+
+export type GetPropertiesSearchQueryVariables = Exact<{
+  year: Scalars['String'];
+  query: Scalars['String'];
+}>;
+
+
+export type GetPropertiesSearchQuery = { getPropertiesSearch: Array<Maybe<{ id: number, name: string, address: string, totalRooms: number, availableRooms: number, year: string }>> };
 
 export type GetPropertyEntityQueryVariables = Exact<{
   propertyId: Scalars['Int'];
@@ -624,6 +639,47 @@ export function useGetPropertiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type GetPropertiesQueryHookResult = ReturnType<typeof useGetPropertiesQuery>;
 export type GetPropertiesLazyQueryHookResult = ReturnType<typeof useGetPropertiesLazyQuery>;
 export type GetPropertiesQueryResult = Apollo.QueryResult<GetPropertiesQuery, GetPropertiesQueryVariables>;
+export const GetPropertiesSearchDocument = gql`
+    query GetPropertiesSearch($year: String!, $query: String!) {
+  getPropertiesSearch(year: $year, query: $query) {
+    id
+    name
+    address
+    totalRooms
+    availableRooms
+    year
+  }
+}
+    `;
+
+/**
+ * __useGetPropertiesSearchQuery__
+ *
+ * To run a query within a React component, call `useGetPropertiesSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPropertiesSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPropertiesSearchQuery({
+ *   variables: {
+ *      year: // value for 'year'
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useGetPropertiesSearchQuery(baseOptions: Apollo.QueryHookOptions<GetPropertiesSearchQuery, GetPropertiesSearchQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPropertiesSearchQuery, GetPropertiesSearchQueryVariables>(GetPropertiesSearchDocument, options);
+      }
+export function useGetPropertiesSearchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPropertiesSearchQuery, GetPropertiesSearchQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPropertiesSearchQuery, GetPropertiesSearchQueryVariables>(GetPropertiesSearchDocument, options);
+        }
+export type GetPropertiesSearchQueryHookResult = ReturnType<typeof useGetPropertiesSearchQuery>;
+export type GetPropertiesSearchLazyQueryHookResult = ReturnType<typeof useGetPropertiesSearchLazyQuery>;
+export type GetPropertiesSearchQueryResult = Apollo.QueryResult<GetPropertiesSearchQuery, GetPropertiesSearchQueryVariables>;
 export const GetPropertyEntityDocument = gql`
     query GetPropertyEntity($propertyId: Int!, $year: Int!) {
   getPropertyEntity(propertyId: $propertyId, year: $year) {

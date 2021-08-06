@@ -61,9 +61,9 @@ export const UserActions: RootActions['user'] = {
 		});
 
 		return async () => {
-			const token = (await localStorage.getItem(
+			const token = localStorage.getItem(
 				process.env.REACT_APP_CLEVER_TOKEN!
-			)!) as string;
+			)! as string;
 
 			if (token) {
 				const jwt: { userId: number } = decode(token);

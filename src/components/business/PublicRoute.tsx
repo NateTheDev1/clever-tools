@@ -1,6 +1,5 @@
 import { Redirect, Route } from 'react-router';
 import { UserSelectors } from '../../redux/User/selectors';
-import Loading from '../ui/Loading';
 
 export const PublicRoute: any = ({
 	children,

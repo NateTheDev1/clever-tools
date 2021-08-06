@@ -15,12 +15,15 @@ import {
 	useDeletePropertyMutation,
 	useGetPropertyEntityQuery
 } from '../graphql';
+import { UserSelectors } from '../redux/User/selectors';
 import './Property.scss';
 
 const Property = () => {
 	const { propertyId, year }: { propertyId: string; year: string } =
 		useParams();
 	const history = useHistory();
+
+	const user = UserSelectors.useSelectUser();
 
 	const [editingProperty, setEditingProperty] = useState(false);
 
@@ -115,15 +118,21 @@ const Property = () => {
 							Go Back
 						</button>
 
-						<button onClick={() => setEditingProperty(true)}>
-							Edit Property
-						</button>
-						<button
-							className="delete-btn"
-							onClick={() => onDelete()}
-						>
-							Delete Property
-						</button>
+						{user?.admin && (
+							<>
+								<button
+									onClick={() => setEditingProperty(true)}
+								>
+									Edit Property
+								</button>
+								<button
+									className="delete-btn"
+									onClick={() => onDelete()}
+								>
+									Delete Property
+								</button>
+							</>
+						)}
 					</div>
 				</div>
 				<p className="subtitle">
@@ -131,7 +140,7 @@ const Property = () => {
 					availability.
 				</p>
 				<hr />
-				<AddRoom year={year} />
+				{user?.admin && <AddRoom year={year} />}
 				{!loading && (
 					<RoomsTable rooms={data?.getPropertyEntity.rooms as any} />
 				)}
