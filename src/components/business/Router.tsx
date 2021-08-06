@@ -19,7 +19,10 @@ const Router = () => {
 	const getUser = UserActions.useFetchUser();
 
 	useEffect(() => {
-		if (!user) {
+		if (
+			!user &&
+			localStorage.getItem(process.env.REACT_APP_CLEVER_TOKEN as string)
+		) {
 			getUser();
 		}
 	}, []);
