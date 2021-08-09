@@ -269,7 +269,7 @@ export type GetPropertiesQueryVariables = Exact<{
 }>;
 
 
-export type GetPropertiesQuery = { getProperties: Array<Maybe<{ id: number, name: string, address: string, totalRooms: number, availableRooms: number, year: string }>> };
+export type GetPropertiesQuery = { getProperties: Array<Maybe<{ id: number, name: string, address: string, year: string }>> };
 
 export type GetPropertiesSearchQueryVariables = Exact<{
   year: Scalars['String'];
@@ -277,7 +277,7 @@ export type GetPropertiesSearchQueryVariables = Exact<{
 }>;
 
 
-export type GetPropertiesSearchQuery = { getPropertiesSearch: Array<Maybe<{ id: number, name: string, address: string, totalRooms: number, availableRooms: number, year: string }>> };
+export type GetPropertiesSearchQuery = { getPropertiesSearch: Array<Maybe<{ id: number, name: string, address: string, year: string }>> };
 
 export type GetPropertyEntityQueryVariables = Exact<{
   propertyId: Scalars['Int'];
@@ -605,8 +605,6 @@ export const GetPropertiesDocument = gql`
     id
     name
     address
-    totalRooms
-    availableRooms
     year
   }
 }
@@ -645,8 +643,6 @@ export const GetPropertiesSearchDocument = gql`
     id
     name
     address
-    totalRooms
-    availableRooms
     year
   }
 }

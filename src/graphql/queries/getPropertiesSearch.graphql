@@ -3,8 +3,6 @@ query GetPropertiesSearch($year: String!, $query: String!) {
 		id
 		name
 		address
-		totalRooms
-		availableRooms
 		year
 	}
 }
