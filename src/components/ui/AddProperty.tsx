@@ -6,7 +6,6 @@ import './AddProperty.scss';
 import AddedProperty from './emitters/addedProperty';
 
 type Inputs = {
-	name: string;
 	address: string;
 };
 
@@ -26,7 +25,7 @@ export const AddProperty = ({ year }: { year: string }) => {
 		add({
 			variables: {
 				input: {
-					name: data.name,
+					name: '',
 					address: data.address,
 					year: year
 				}
@@ -51,32 +50,17 @@ export const AddProperty = ({ year }: { year: string }) => {
 	return (
 		<div className="add-property">
 			<h4>Add a property for {year}</h4>
-			<p style={{ opacity: 0.5, marginTop: '1rem' }}>
+			<p style={{ opacity: 0.5, marginTop: '1rem' }} className="mb-4">
 				Property is added for the currently selected year.
 			</p>
 			<form onSubmit={handleSubmit(data => onSubmit(data))}>
-				<label htmlFor="Property Name" className="mt-8 mb-4">
-					Property Name
-				</label>
-				<input
-					{...register('name')}
-					required
-					type="text"
-					autoComplete="Property Name"
-					name="name"
-					className={`p-3 ${errors.name && 'error'}`}
-					placeholder="Westveld Park Apartments"
-				/>
-				<label htmlFor="Property Name" className="mt-8 mb-4">
-					Property Address
-				</label>
 				<input
 					{...register('address')}
 					required
 					type="text"
 					autoComplete="Property Address"
 					name="address"
-					className={`p-3 ${errors.name && 'error'}`}
+					className={`p-3 ${errors.address && 'error'}`}
 					placeholder="1700 W Example Ave."
 				/>
 				{addData.loading ? (

@@ -17,12 +17,6 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 
 const columns = [
 	{
-		id: 'name',
-		label: 'Property Name',
-		minWidth: 170,
-		align: undefined
-	},
-	{
 		id: 'address',
 		label: 'Property Adress',
 		minWidth: 100,
@@ -53,7 +47,7 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 		let newProperties: any[] = [];
 		if (data?.getProperties) {
 			newProperties = data?.getProperties.filter(p =>
-				p?.name.toLowerCase().includes(e.target.value.toLowerCase())
+				p?.address.toLowerCase().includes(e.target.value.toLowerCase())
 			);
 		}
 		setProperties(newProperties);
@@ -77,12 +71,12 @@ export const PropertiesTable = ({ year }: { year: string }) => {
 		<>
 			<div className="search">
 				<label htmlFor="name" className="mt-8 mb-4">
-					Search for a property name
+					Search for a property
 				</label>
 				<input
 					required
 					type="text"
-					autoComplete="none"
+					autoComplete="off"
 					name="name"
 					onChange={e => onChange(e)}
 					className={`p-3`}

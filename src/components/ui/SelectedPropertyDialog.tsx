@@ -11,7 +11,6 @@ import { PropagateLoader } from 'react-spinners';
 import { Property, useEditPropertyMutation } from '../../graphql';
 
 type Inputs = {
-	name: string;
 	address: string;
 };
 
@@ -36,14 +35,14 @@ export const SelectedPropertyDialog = ({
 	const [editProperty, editPropertyData] = useEditPropertyMutation();
 
 	useEffect(() => {
-		reset({ name: property.name, address: property.address });
+		reset({ address: property.address });
 	}, [property, reset]);
 
 	const submitEdit = (data: Inputs) => {
 		editProperty({
 			variables: {
 				id: property.id,
-				input: { name: data.name, address: data.address }
+				input: { name: '', address: data.address }
 			}
 		})
 			.then(res => {
@@ -69,19 +68,7 @@ export const SelectedPropertyDialog = ({
 				</DialogTitle>
 				<DialogContent>
 					<div className="edit-room-form">
-						<label htmlFor="Property Name" className="mt-8 mb-4">
-							Property Name
-						</label>
-						<input
-							{...register('name')}
-							required
-							type="text"
-							autoComplete="Property Name"
-							name="name"
-							className={`p-3 ${errors.name && 'error'}`}
-							placeholder="Westview Park"
-						/>
-						<label htmlFor="Property Address" className="mt-8 mb-4">
+						<label htmlFor="Property Address" className="mt-4 mb-4">
 							Property Address
 						</label>
 						<input
