@@ -27,7 +27,7 @@ const Router = () => {
 		}
 	}, []);
 
-	localStorage.removeItem('REACT_APP_CLEVER_TOKEN');
+	localStorage.removeItem('CLEVER_TOKEN_JWT');
 
 	return (
 		<div>
