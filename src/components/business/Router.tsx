@@ -27,6 +27,8 @@ const Router = () => {
 		}
 	}, []);
 
+	localStorage.removeItem('REACT_APP_CLEVER_TOKEN');
+
 	return (
 		<div>
 			<SwitchTransition>
@@ -36,7 +38,7 @@ const Router = () => {
 					timeout={100}
 				>
 					<Switch location={location}>
-						<PrivateRoute path="/app/admin">
+						{/* <PrivateRoute path="/app/admin">
 							<Admin />
 						</PrivateRoute>
 						<PrivateRoute path="/app/properties/:year/:propertyId">
@@ -47,7 +49,7 @@ const Router = () => {
 						</PrivateRoute>
 						<PrivateRoute path="/app">
 							<Home />
-						</PrivateRoute>
+						</PrivateRoute> */}
 						<PublicRoute path="/">
 							<Login />
 						</PublicRoute>
