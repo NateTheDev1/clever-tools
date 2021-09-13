@@ -61,19 +61,7 @@ const Login = () => {
 					Property Management Tools
 				</h4>
 				<hr className="hr" />
-				<h2 className="mt-8 text-lg leading-loose font-medium">
-					The site is temporarily offline. Please contact me at
-					nathaniel@datacompusa.com or by using the link below.
-				</h2>
-
-				<a
-					href="mailto:nathaniel@datacompusa.com"
-					className="underline text-lg mt-4"
-				>
-					Contact Me
-				</a>
-
-				{/* <form onSubmit={handleSubmit(data => onSubmit(data))}>
+				<form onSubmit={handleSubmit(data => onSubmit(data))}>
 					<label htmlFor="username" className="mt-8 mb-4">
 						Username
 					</label>
@@ -112,7 +100,7 @@ const Login = () => {
 							{formError}
 						</p>
 					)}
-				</form> */}
+				</form>
 				<h4 className="text-gray-500 mt-8">Authorized Usage Only</h4>
 			</div>
 		</div>
